@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Switch, Button, Alert} from 'react-native';
+import { StyleSheet, Text, View, Switch, Button, Alert} from 'react-native';
 import { RadioButton } from 'react-native-paper';
 import { useState } from 'react';
 import Tinput from './Tinput'
@@ -15,6 +15,19 @@ export default function Formularz() {
     const [name, setName] = useState('imię')
     const [surName, setSurName] = useState('nazwisko')
     const [value, setValue] = useState('1');
+    
+    const klik = function(){
+      Alert.alert('Alert Title', 'My Alert Msg', [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ]);
+    }
+
+    
 
   return (
     <View style={styles.container}>
@@ -31,7 +44,9 @@ export default function Formularz() {
           <Radio img={Slytherin} value='4' />
         </View>
       </RadioButton.Group>
-
+      <Button onPress={klik}
+      title='wyślij dane'
+      color='#ed9434'/>
       <StatusBar style="auto" />
     </View>
   );
