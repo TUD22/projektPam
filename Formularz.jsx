@@ -8,15 +8,20 @@ import Gryffindor from './Gryffindor.png'
 import Ravenclaw from './Ravenclaw.png'
 import Hufflepuff from './Hufflepuff.png'
 import Slytherin from './Slytherin.png'
+import Allter from './Allter';
 
 
 export default function Formularz() {
 
-    const [name, setName] = useState('imię')
-    const [surName, setSurName] = useState('nazwisko')
+    const [dane, setDane] = useState('')
+    const [name, setName] = useState('')
+    const [surName, setSurName] = useState('')
     const [value, setValue] = useState('1');
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
     
-    const klik = function(){
+    const klik = ()=>{
       Alert.alert('Alert Title', 'My Alert Msg', [
         {
           text: 'Cancel',
@@ -32,22 +37,33 @@ export default function Formularz() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Formularz TSWH</Text>
-      <img></img>
-      <Tinput value={name} style={styles.input} onChangeText={setName} name='imię'></Tinput>
-      <Tinput value={surName} style={styles.input} onChangeText={setSurName} name='nazwisko'></Tinput>
+      <Tinput value={name} style={styles.input} onChangeText={setName} name='imię' placeholder='imię'/>
+      <Tinput value={surName} style={styles.input} onChangeText={setSurName} name='nazwisko' placeholder='nazwisko'></Tinput>
       <Text style={styles.text}>Do jakiego domu należysz?</Text>
       <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
         <View style={styles.radio}>
-          <Radio img={Gryffindor} value='1' />
-          <Radio img={Hufflepuff} value='2' />
-          <Radio img={Ravenclaw} value='3' />
-          <Radio img={Slytherin} value='4' />
+          <Radio img={Gryffindor} value='Gryffindor' />
+          <Radio img={Hufflepuff} value='Hufflepuff' />
+          <Radio img={Ravenclaw} value='Ravenclaw'/>
+          <Radio img={Slytherin} value='Slytherin'/>
         </View>
       </RadioButton.Group>
+      <Text style={styles.stext}>Mugol
+      <Switch
+        style={styles.switch}
+        trackColor={{false: '#767577', true: '#b36b00'}}
+        thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+        activeThumbColor={'#ffaa00'}
+      />Czarodziej
+      </Text>
       <Button onPress={klik}
       title='wyślij dane'
       color='#ed9434'/>
       <StatusBar style="auto" />
+      <Allter></Allter>
     </View>
   );
 }
@@ -77,6 +93,13 @@ const styles = StyleSheet.create({
   radio:{
     flexDirection: 'row',
     justifyContent: 'center'
+  },
+  switch: {
+    margin: '15px'
+  },
+  stext:{
+    color: 'white',
+    fontSize: '1.1rem'
   }
 
 });
