@@ -1,14 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Switch, Button, Alert} from 'react-native';
+import { StyleSheet, Text, View, Switch, Button} from 'react-native';
 import { RadioButton } from 'react-native-paper';
 import { useState } from 'react';
-import Tinput from './Tinput'
+import Tinput from './Tinput';
 import Radio from './Radio';
+import Dane from './Dane';
 import Gryffindor from './Gryffindor.png'
 import Ravenclaw from './Ravenclaw.png'
 import Hufflepuff from './Hufflepuff.png'
 import Slytherin from './Slytherin.png'
-import Allter from './Allter';
+
 
 
 export default function Formularz() {
@@ -16,20 +17,13 @@ export default function Formularz() {
     const [dane, setDane] = useState('')
     const [name, setName] = useState('')
     const [surName, setSurName] = useState('')
-    const [value, setValue] = useState('1');
+    const [value, setValue] = useState('');
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
     
     const klik = ()=>{
-      Alert.alert('Alert Title', 'My Alert Msg', [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
-      ]);
+      alert(`imię: ${name}\nnazwisko: ${surName}\ndom:${value}\n${isEnabled ? 'Czarodziej' : 'Mugol'}\nulubiony przedmiot magiczny: ${dane}`)
     }
 
     
@@ -59,11 +53,10 @@ export default function Formularz() {
         activeThumbColor={'#ffaa00'}
       />Czarodziej
       </Text>
+      <Dane dane={setDane} style={styles.input}/>
       <Button onPress={klik}
       title='wyślij dane'
       color='#ed9434'/>
-      <StatusBar style="auto" />
-      <Allter></Allter>
     </View>
   );
 }
